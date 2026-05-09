@@ -52,3 +52,18 @@ footer {
     padding: 15px;
     margin-top: 30px;
 }
+.resource-card {
+    background: white;
+    padding: 18px;
+    margin: 15px auto;
+    width: 70%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.resource-card h3 {
+    color: #0d6efd;
+    margin-bottom: 8px;
+}

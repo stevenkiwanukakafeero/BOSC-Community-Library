@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Python Basics",
+    "category": "Programming",
+    "level": "Beginner",
+    "description": "Introduction to Python syntax, variables, loops, and functions."
+  },
+  {
+    "title": "GitHub Collaboration",
+    "category": "Open Source",
+    "level": "Beginner",
+    "description": "Guide to issues, branches, commits, pull requests, and code review."
+  },
+  {
+    "title": "Linux Command Line",
+    "category": "Linux",
+    "level": "Beginner",
+    "description": "Basic Linux commands for file management and system navigation."
+  },
+  {
+    "title": "Software Engineering Principles",
+    "category": "Software Engineering",
+    "level": "Intermediate",
+    "description": "Covers SDLC, requirements, design, testing, and maintenance."
+  },
+  {
+    "title": "JavaScript DOM Manipulation",
+    "category": "Web Development",
+    "level": "Intermediate",
+    "description": "Learn how JavaScript interacts with HTML elements dynamically."
+  },
+  {
+    "title": "Open Source Licensing",
+    "category": "Open Source",
+    "level": "Intermediate",
+    "description": "Explains common licenses, contributor rights, and reuse conditions."
+  }
+]
