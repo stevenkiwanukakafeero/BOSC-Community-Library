@@ -1,11 +1,19 @@
+<div id="stats" class="stats=-box"></div>
 let resources = [];
 
 async function loadResources() {
+
     try {
         const response = await fetch("data/resources.json");
+
         resources = await response.json();
+
         displayResources(resources);
+
+        displayStats();
+
     } catch (error) {
+
         document.getElementById("results").innerHTML =
             "<p>Failed to load resources. Please try again later.</p>";
     }
@@ -45,3 +53,13 @@ function searchResources() {
 }
 
 document.addEventListener("DOMContentLoaded", loadResources);
+
+function displayStats() {
+    const stats = document.getElementById("stats");
+    const categories = [...new Set(resources.map(resource => resource.category))];
+
+    stats.innerHTML = `
+        <p><strong>Total Resources:</strong> ${resources.length}</p>
+        <p><strong>Categories:</strong> ${categories.length}</p>
+    `;
+}
