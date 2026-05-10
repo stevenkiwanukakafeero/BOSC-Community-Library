@@ -2,15 +2,23 @@ let resources = [];
 
 async function loadResources() {
     try {
-        const response = await fetch("data/resources.json");
+        const response = await fetch("./data/resources.json");
+
+        if (!response.ok) {
+            throw new Error("Could not load resources.json");
+        }
+
         resources = await response.json();
 
-        displayResources(resources);
-        displayStats();
     } catch (error) {
+        console.error("Resource loading error:", error);
         document.getElementById("results").innerHTML =
-            "<p>Failed to load resources. Please run the website using localhost.</p>";
+            "<p>Failed to load resources. Check resources.json path or JSON format.</p>";
+        return;
     }
+
+    displayStats();
+    displayResources(resources);
 }
 
 function displayResources(resourceList) {
@@ -59,12 +67,77 @@ function filterByCategory() {
 
 function displayStats() {
     const stats = document.getElementById("stats");
-    const categories = [...new Set(resources.map(resource => resource.category))];
+
+    if (!stats) {
+        return;
+    }
+
+    const totalResources = resources.length;
+
+    const categories = [
+        ...new Set(resources.map(resource => resource.category))
+    ];
+
+    const beginnerResources = resources.filter(
+        resource => resource.level === "Beginner"
+    ).length;
+
+    const intermediateResources = resources.filter(
+        resource => resource.level === "Intermediate"
+    ).length;
 
     stats.innerHTML = `
-        <p><strong>Total Resources:</strong> ${resources.length}</p>
-        <p><strong>Categories:</strong> ${categories.length}</p>
+        <div class="stat-card">
+            <h3>${totalResources}</h3>
+            <p>Total Resources</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>${categories.length}</h3>
+            <p>Categories</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>${beginnerResources}</h3>
+            <p>Beginner Resources</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>${intermediateResources}</h3>
+            <p>Intermediate Resources</p>
+        </div>
     `;
 }
 
 document.addEventListener("DOMContentLoaded", loadResources);
+
+function displayDashboard() {
+    const dashboard = document.getElementById("dashboardCards");
+
+    const totalResources = resources.length;
+    const categories = [...new Set(resources.map(resource => resource.category))];
+    const beginnerResources = resources.filter(resource => resource.level === "Beginner").length;
+    const intermediateResources = resources.filter(resource => resource.level === "Intermediate").length;
+
+    dashboard.innerHTML = `
+        <div class="dashboard-card">
+            <h3>${totalResources}</h3>
+            <p>Total Resources</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>${categories.length}</h3>
+            <p>Categories</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>${beginnerResources}</h3>
+            <p>Beginner</p>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>${intermediateResources}</h3>
+            <p>Intermediate</p>
+        </div>
+    `;
+}
