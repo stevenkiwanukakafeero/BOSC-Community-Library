@@ -20,14 +20,27 @@
 
 <section class="hero">
 
-    <input type="text" id="searchInput" placeholder="Search resources...">
+    <select id="categoryFilter" onchange="filterByCategory()">
+        <option value="all">All Categories</option>
+        <option value="Programming">Programming</option>
+        <option value="Linux">Linux</option>
+        <option value="Open Source">Open Source</option>
+        <option value="Software Engineering">Software Engineering</option>
+        <option value="Web Development">Web Development</option>
+    </select>
 
-    <button onclick="searchResources()">Search</button>
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search resources..."
+        onkeyup="searchResources()"
+    >
+
+    <div id="stats" class="stats-box"></div>
 
     <div id="results"></div>
 
 </section>
-
 <script src="assets/js/search.js"></script>
 
 </body>
