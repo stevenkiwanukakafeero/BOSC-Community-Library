@@ -1,21 +1,15 @@
-<div id="stats" class="stats=-box"></div>
 let resources = [];
 
 async function loadResources() {
-
     try {
         const response = await fetch("data/resources.json");
-
         resources = await response.json();
 
         displayResources(resources);
-
         displayStats();
-
     } catch (error) {
-
         document.getElementById("results").innerHTML =
-            "<p>Failed to load resources. Please try again later.</p>";
+            "<p>Failed to load resources. Please run the website using localhost.</p>";
     }
 }
 
@@ -42,17 +36,26 @@ function displayResources(resourceList) {
 
 function searchResources() {
     const input = document.getElementById("searchInput").value.toLowerCase();
+    const selectedCategory = document.getElementById("categoryFilter").value;
 
-    const filtered = resources.filter(resource =>
-        resource.title.toLowerCase().includes(input) ||
-        resource.category.toLowerCase().includes(input) ||
-        resource.description.toLowerCase().includes(input)
-    );
+    const filtered = resources.filter(resource => {
+        const matchesSearch =
+            resource.title.toLowerCase().includes(input) ||
+            resource.category.toLowerCase().includes(input) ||
+            resource.description.toLowerCase().includes(input);
+
+        const matchesCategory =
+            selectedCategory === "all" || resource.category === selectedCategory;
+
+        return matchesSearch && matchesCategory;
+    });
 
     displayResources(filtered);
 }
 
-document.addEventListener("DOMContentLoaded", loadResources);
+function filterByCategory() {
+    searchResources();
+}
 
 function displayStats() {
     const stats = document.getElementById("stats");
@@ -63,3 +66,5 @@ function displayStats() {
         <p><strong>Categories:</strong> ${categories.length}</p>
     `;
 }
+
+document.addEventListener("DOMContentLoaded", loadResources);
