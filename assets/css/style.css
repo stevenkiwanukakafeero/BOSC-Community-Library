@@ -212,3 +212,42 @@ footer {
     text-align: center;
     padding: 20px;
 }
+#themeToggle {
+    margin-left: 20px;
+    padding: 8px 14px;
+    background: #ffffff;
+    color: #222;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.dark-mode {
+    background: #121212;
+    color: #f5f5f5;
+}
+
+.dark-mode .hero-section,
+.dark-mode .hero,
+.dark-mode .features-section {
+    background: #181818;
+}
+
+.dark-mode .feature-card,
+.dark-mode .card,
+.dark-mode .resource-card,
+.dark-mode .stat-card {
+    background: #242424;
+    color: #f5f5f5;
+}
+
+.dark-mode .community-section {
+    background: #1e1e1e;
+}
+
+.dark-mode input,
+.dark-mode select {
+    background: #242424;
+    color: #f5f5f5;
+    border: 1px solid #555;
+}
