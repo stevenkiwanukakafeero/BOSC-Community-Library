@@ -12,17 +12,28 @@ async function loadResources() {
 
     } catch (error) {
         console.error("Resource loading error:", error);
-        document.getElementById("results").innerHTML =
-            "<p>Failed to load resources. Check resources.json path or JSON format.</p>";
+
+        const results = document.getElementById("results");
+        if (results) {
+            results.innerHTML =
+                "<p>Failed to load resources. Check resources.json path or JSON format.</p>";
+        }
+
         return;
     }
 
     displayStats();
+    displayDashboard();
     displayResources(resources);
 }
 
 function displayResources(resourceList) {
     const results = document.getElementById("results");
+
+    if (!results) {
+        return;
+    }
+
     results.innerHTML = "";
 
     if (resourceList.length === 0) {
@@ -43,8 +54,11 @@ function displayResources(resourceList) {
 }
 
 function searchResources() {
-    const input = document.getElementById("searchInput").value.toLowerCase();
-    const selectedCategory = document.getElementById("categoryFilter").value;
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+
+    const input = searchInput ? searchInput.value.toLowerCase() : "";
+    const selectedCategory = categoryFilter ? categoryFilter.value : "all";
 
     const filtered = resources.filter(resource => {
         const matchesSearch =
@@ -78,6 +92,25 @@ function displayStats() {
         ...new Set(resources.map(resource => resource.category))
     ];
 
+    stats.innerHTML = `
+        <p><strong>Total Resources:</strong> ${totalResources}</p>
+        <p><strong>Categories:</strong> ${categories.length}</p>
+    `;
+}
+
+function displayDashboard() {
+    const dashboard = document.getElementById("dashboardCards");
+
+    if (!dashboard) {
+        return;
+    }
+
+    const totalResources = resources.length;
+
+    const categories = [
+        ...new Set(resources.map(resource => resource.category))
+    ];
+
     const beginnerResources = resources.filter(
         resource => resource.level === "Beginner"
     ).length;
@@ -85,39 +118,6 @@ function displayStats() {
     const intermediateResources = resources.filter(
         resource => resource.level === "Intermediate"
     ).length;
-
-    stats.innerHTML = `
-        <div class="stat-card">
-            <h3>${totalResources}</h3>
-            <p>Total Resources</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>${categories.length}</h3>
-            <p>Categories</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>${beginnerResources}</h3>
-            <p>Beginner Resources</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>${intermediateResources}</h3>
-            <p>Intermediate Resources</p>
-        </div>
-    `;
-}
-
-document.addEventListener("DOMContentLoaded", loadResources);
-
-function displayDashboard() {
-    const dashboard = document.getElementById("dashboardCards");
-
-    const totalResources = resources.length;
-    const categories = [...new Set(resources.map(resource => resource.category))];
-    const beginnerResources = resources.filter(resource => resource.level === "Beginner").length;
-    const intermediateResources = resources.filter(resource => resource.level === "Intermediate").length;
 
     dashboard.innerHTML = `
         <div class="dashboard-card">
@@ -132,12 +132,14 @@ function displayDashboard() {
 
         <div class="dashboard-card">
             <h3>${beginnerResources}</h3>
-            <p>Beginner</p>
+            <p>Beginner Resources</p>
         </div>
 
         <div class="dashboard-card">
             <h3>${intermediateResources}</h3>
-            <p>Intermediate</p>
+            <p>Intermediate Resources</p>
         </div>
     `;
 }
+
+document.addEventListener("DOMContentLoaded", loadResources);
