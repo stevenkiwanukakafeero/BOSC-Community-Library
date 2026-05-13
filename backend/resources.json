@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Python Basics",
+    "category": "Programming",
+    "level": "Beginner",
+    "description": "Introduction to Python syntax, variables, loops, and functions."
+  },
+  {
+    "title": "Linux Command Line",
+    "category": "Linux",
+    "level": "Beginner",
+    "description": "Basic Linux commands for file management and system navigation."
+  }
+]
