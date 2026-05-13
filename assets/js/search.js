@@ -2,7 +2,7 @@ let resources = [];
 
 async function loadResources() {
     try {
-        const response = await fetch("./data/resources.json");
+        const response = await fetch("http://127.0.0.1:5000/api/resources");
 
         if (!response.ok) {
             throw new Error("Could not load resources.json");
