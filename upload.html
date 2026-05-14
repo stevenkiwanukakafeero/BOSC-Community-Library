@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Resource</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Upload Library Resource</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="search.html">Search Resources</a>
+    <a href="upload.html">Upload Resource</a>
+    <button id="themeToggle" onclick="toggleTheme()">Dark Mode</button>
+</nav>
+
+<section class="hero">
+    <h2>Submit a PDF Resource</h2>
+
+    <form id="uploadForm" class="upload-form">
+        <input type="text" id="title" placeholder="Resource title" required>
+
+        <select id="category" required>
+            <option value="">Select Category</option>
+            <option value="Programming">Programming</option>
+            <option value="Linux">Linux</option>
+            <option value="Open Source">Open Source</option>
+            <option value="Software Engineering">Software Engineering</option>
+            <option value="Web Development">Web Development</option>
+        </select>
+
+        <select id="level" required>
+            <option value="">Select Level</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+        </select>
+
+        <textarea id="description" placeholder="Resource description" required></textarea>
+
+        <input type="file" id="pdfFile" accept="application/pdf" required>
+
+        <button type="submit">Upload PDF</button>
+    </form>
+
+    <div id="uploadMessage"></div>
+</section>
+
+<script src="assets/js/upload.js"></script>
+<script src="assets/js/theme.js"></script>
+
+</body>
+</html>
