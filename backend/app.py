@@ -1,3 +1,32 @@
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+import json
+import os
+
+app = Flask(__name__)
+CORS(app)
+
+UPLOAD_FOLDER = "uploads"
+RESOURCES_FILE = "resources.json"
+
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+
+@app.route("/")
+def home():
+    return jsonify({
+        "message": "BOSC Community Library Backend API is running"
+    })
+
+
+@app.route("/api/resources", methods=["GET"])
+def get_resources():
+    with open(RESOURCES_FILE, "r") as file:
+        resources = json.load(file)
+
+    return jsonify(resources)
+
+
 @app.route("/api/upload", methods=["POST"])
 def upload_file():
     title = request.form.get("title")
@@ -39,3 +68,7 @@ def upload_file():
         "message": "PDF resource uploaded successfully",
         "resource": new_resource
     })
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
